@@ -1,0 +1,26 @@
+/* ... (estilos anteriores) ... */
+
+/* Estilo para os novos botões de debug dentro dos planos */
+.plan {
+  position: relative; /* Necessário para o posicionamento do botão */
+  padding-bottom: 50px; /* Espaço para o botão */
+}
+
+.debug-plan-button {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.debug-plan-button:hover {
+  background-color: #e0a800;
+}

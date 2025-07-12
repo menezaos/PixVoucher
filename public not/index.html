@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal de Acesso Wi-Fi</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Selecione um Plano de Internet</h1>
+      <div id="plans-container">
+        <div class="plan" data-id="1">
+          <h2>1 Hora</h2>
+          <p class="price">R$ 5,00</p>
+        </div>
+        <div class="plan" data-id="2">
+          <h2>1 Dia</h2>
+          <p class="price">R$ 15,00</p>
+        </div>
+        <div class="plan" data-id="3">
+          <h2>7 Dias</h2>
+          <p class="price">R$ 30,00</p>
+        </div>
+      </div>
+
+      <div id="debug-section">
+        <button id="debug-button" class="debug-button">
+          Liberar Acesso (Debug)
+        </button>
+      </div>
+      <div id="payment-section" class="hidden"></div>
+
+      <div id="success-section" class="hidden"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

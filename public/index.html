@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal de Acesso Wi-Fi</title>
+    <!-- Inclua o Tailwind CSS para estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Fonte Inter para uma aparência moderna */
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      /* Estilo básico para o spinner */
+      .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border-left-color: #0d6efd; /* Cor primária do Bootstrap */
+        animation: spin 1s ease infinite;
+        margin: 20px auto; /* Centraliza */
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .hidden {
+        display: none !important;
+      }
+      /* Ajuste para garantir que o textarea não transborde */
+      textarea {
+        word-break: break-all; /* Quebra palavras longas */
+        white-space: pre-wrap; /* Preserva espaços e quebras de linha */
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gray-100 flex items-center justify-center min-h-screen p-4 sm:p-6"
+  >
+    <div
+      class="container mx-auto p-6 max-w-lg bg-white shadow-xl rounded-xl text-center border border-gray-200 w-full"
+    >
+      <h1
+        class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6 sm:mb-8"
+      >
+        Selecione um Plano de Internet
+      </h1>
+
+      <div
+        id="plans-container"
+        class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8"
+      >
+        <!-- Planos serão carregados dinamicamente pelo script.js -->
+        <!-- Exemplo de placeholder para garantir que o estilo inicial funcione -->
+        <div
+          class="plan bg-blue-100 p-5 sm:p-6 rounded-lg shadow-md cursor-pointer hover:bg-blue-200 transition-colors duration-200"
+        >
+          <h2 class="text-lg sm:text-xl font-semibold text-blue-800">
+            Carregando...
+          </h2>
+          <p
+            class="price text-xl sm:text-2xl font-bold text-blue-900 mt-1 sm:mt-2"
+          >
+            ...
+          </p>
+        </div>
+      </div>
+
+      <div id="payment-section" class="hidden">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
+          Pague com PIX para liberar seu acesso
+        </h2>
+        <p
+          id="status-message"
+          class="text-gray-700 text-base sm:text-lg mb-3 sm:mb-4"
+        >
+          Escaneie o QR Code abaixo com o app do seu banco:
+        </p>
+        <div
+          id="qrcode-container"
+          class="mb-5 sm:mb-6 flex justify-center items-center"
+        >
+          <!-- QR Code será inserido aqui pelo script.js -->
+          <!-- A imagem dentro será responsiva devido às classes no script.js -->
+        </div>
+        <div id="spinner" class="spinner hidden"></div>
+        <!-- Spinner adicionado aqui -->
+        <p id="waiting-message" class="text-gray-600 text-base sm:text-lg mb-4">
+          Aguardando confirmação do pagamento...
+        </p>
+        <p class="text-gray-700 text-base sm:text-lg mb-2">
+          Ou copie o código:
+        </p>
+        <textarea
+          id="pix-code"
+          rows="4"
+          readonly
+          class="w-full p-3 border border-gray-300 rounded-lg text-gray-800 bg-gray-50 resize-none text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+        ></textarea>
+        <button
+          id="copy-pix-button"
+          class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 sm:py-3 px-4 rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 text-base sm:text-lg"
+        >
+          Copiar Código PIX
+        </button>
+      </div>
+
+      <div id="success-section" class="hidden">
+        <h2 class="text-2xl sm:text-3xl font-bold text-green-700 mb-3 sm:mb-4">
+          Pagamento Aprovado!
+        </h2>
+        <p class="text-gray-700 text-base sm:text-lg mb-3 sm:mb-4">
+          Seu acesso à internet foi liberado.
+        </p>
+        <p class="text-gray-600 text-base sm:text-lg mb-5 sm:mb-6">
+          Clique no botão abaixo para continuar sua navegação.
+        </p>
+        <!-- Botão "Acessar Internet" será adicionado dinamicamente pelo script.js -->
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
