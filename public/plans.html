@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comprar Plano de Acesso Wi-Fi</title>
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body class="bg-light">
+    <div class="container mt-5 mb-5 main-container">
+      <div class="text-center">
+        <h1 class="display-5 fw-bold">Nossos Planos de Acesso</h1>
+        <p class="lead text-muted">
+          Selecione um dos planos abaixo para navegar.
+        </p>
+        <a id="back-link" href="/" class="btn btn-link text-muted mt-2"
+          >&larr; Voltar para a seleção</a
+        >
+      </div>
+      <div
+        id="plans-container"
+        class="row mt-5 justify-content-center main-panel p-4 g-4"
+      >
+        <div class="text-center p-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Carregando...</span>
+          </div>
+          <p class="text-muted mt-2">Carregando planos...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content main-panel" style="border: none">
+          <div class="modal-header border-0">
+            <h5
+              class="modal-title card-title w-100 text-center"
+              id="paymentModalTitle"
+            >
+              Finalizar Pagamento
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <div id="pix-step-1">
+              <p class="lead">
+                Você selecionou o plano:
+                <strong id="selected-plan-name"></strong>
+              </p>
+              <h3 class="fw-bolder">
+                Valor: R$ <span id="selected-plan-price"></span>
+              </h3>
+              <p class="text-muted mt-4">
+                Clique abaixo para gerar o QR Code PIX e finalizar o pagamento.
+              </p>
+              <button
+                id="generate-pix-button"
+                class="btn btn-primary btn-lg w-100"
+              >
+                Gerar PIX para Pagamento
+              </button>
+            </div>
+
+            <div id="pix-step-2" class="d-none">
+              <p>Escaneie o QR Code abaixo com o app do seu banco.</p>
+              <img
+                id="qr-code-img"
+                src=""
+                alt="PIX QR Code"
+                class="img-fluid mb-3 rounded"
+              />
+              <div id="payment-status-pix"></div>
+              <p class="mt-3">Ou use o PIX Copia e Cola:</p>
+              <textarea
+                id="qr-code-text"
+                class="form-control"
+                rows="4"
+                readonly
+              ></textarea>
+              <button id="copy-qr-text" class="btn btn-secondary w-100 mt-2">
+                Copiar Código
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/plans.js"></script>
+  </body>
+</html>

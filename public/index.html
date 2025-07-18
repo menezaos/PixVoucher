@@ -3,126 +3,152 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portal de Acesso Wi-Fi</title>
-    <!-- Inclua o Tailwind CSS para estilização -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      /* Fonte Inter para uma aparência moderna */
-      body {
-        font-family: "Inter", sans-serif;
-      }
-      /* Estilo básico para o spinner */
-      .spinner {
-        border: 4px solid rgba(0, 0, 0, 0.1);
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        border-left-color: #0d6efd; /* Cor primária do Bootstrap */
-        animation: spin 1s ease infinite;
-        margin: 20px auto; /* Centraliza */
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      .hidden {
-        display: none !important;
-      }
-      /* Ajuste para garantir que o textarea não transborde */
-      textarea {
-        word-break: break-all; /* Quebra palavras longas */
-        white-space: pre-wrap; /* Preserva espaços e quebras de linha */
-      }
-    </style>
+    <title>Bem-vindo ao Wi-Fi</title>
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
-  <body
-    class="bg-gray-100 flex items-center justify-center min-h-screen p-4 sm:p-6"
-  >
-    <div
-      class="container mx-auto p-6 max-w-lg bg-white shadow-xl rounded-xl text-center border border-gray-200 w-full"
-    >
-      <h1
-        class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6 sm:mb-8"
+  <body class="bg-light">
+    <div class="container" id="main-container">
+      <div
+        id="initial-loading"
+        class="d-flex flex-column justify-content-center align-items-center vh-100"
       >
-        Selecione um Plano de Internet
-      </h1>
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Verificando...</span>
+        </div>
+        <p class="mt-3 text-muted">Verificando seu status de conexão...</p>
+      </div>
 
       <div
-        id="plans-container"
-        class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8"
+        id="selection-page"
+        class="d-none flex-column justify-content-center align-items-center vh-100"
       >
-        <!-- Planos serão carregados dinamicamente pelo script.js -->
-        <!-- Exemplo de placeholder para garantir que o estilo inicial funcione -->
-        <div
-          class="plan bg-blue-100 p-5 sm:p-6 rounded-lg shadow-md cursor-pointer hover:bg-blue-200 transition-colors duration-200"
-        >
-          <h2 class="text-lg sm:text-xl font-semibold text-blue-800">
-            Carregando...
-          </h2>
-          <p
-            class="price text-xl sm:text-2xl font-bold text-blue-900 mt-1 sm:mt-2"
-          >
-            ...
-          </p>
+        <div class="text-center mb-5">
+          <img
+            src="logo.png"
+            alt="Logo Provedor"
+            class="mb-4 rounded-circle"
+            width="400"
+            height="400"
+          />
+          <h1 class="display-4 fw-bold">Conecte-se à nossa rede</h1>
+          <p class="lead text-muted">Como você deseja se conectar hoje?</p>
         </div>
-      </div>
-
-      <div id="payment-section" class="hidden">
-        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
-          Pague com PIX para liberar seu acesso
-        </h2>
-        <p
-          id="status-message"
-          class="text-gray-700 text-base sm:text-lg mb-3 sm:mb-4"
-        >
-          Escaneie o QR Code abaixo com o app do seu banco:
-        </p>
-        <div
-          id="qrcode-container"
-          class="mb-5 sm:mb-6 flex justify-center items-center"
-        >
-          <!-- QR Code será inserido aqui pelo script.js -->
-          <!-- A imagem dentro será responsiva devido às classes no script.js -->
+        <div class="row w-100 justify-content-center">
+          <div class="col-lg-5 col-md-6 col-11 mb-4">
+            <a id="voucher-link" href="/voucher.html" class="selection-card">
+              <div class="card-body text-center p-4">
+                <h2 class="card-title mb-3">🎟️ Tenho um Voucher</h2>
+                <p class="card-text">
+                  Já possui um código de acesso? Clique aqui para se conectar
+                  rapidamente.
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class="col-lg-5 col-md-6 col-11 mb-4">
+            <a id="plans-link" href="/plans.html" class="selection-card">
+              <div class="card-body text-center p-4">
+                <h2 class="card-title mb-3">💳 Comprar Acesso</h2>
+                <p class="card-text">
+                  Escolha um plano e pague com PIX para navegar agora mesmo.
+                </p>
+              </div>
+            </a>
+          </div>
         </div>
-        <div id="spinner" class="spinner hidden"></div>
-        <!-- Spinner adicionado aqui -->
-        <p id="waiting-message" class="text-gray-600 text-base sm:text-lg mb-4">
-          Aguardando confirmação do pagamento...
-        </p>
-        <p class="text-gray-700 text-base sm:text-lg mb-2">
-          Ou copie o código:
-        </p>
-        <textarea
-          id="pix-code"
-          rows="4"
-          readonly
-          class="w-full p-3 border border-gray-300 rounded-lg text-gray-800 bg-gray-50 resize-none text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
-        ></textarea>
-        <button
-          id="copy-pix-button"
-          class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 sm:py-3 px-4 rounded-lg shadow-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 text-base sm:text-lg"
-        >
-          Copiar Código PIX
-        </button>
-      </div>
-
-      <div id="success-section" class="hidden">
-        <h2 class="text-2xl sm:text-3xl font-bold text-green-700 mb-3 sm:mb-4">
-          Pagamento Aprovado!
-        </h2>
-        <p class="text-gray-700 text-base sm:text-lg mb-3 sm:mb-4">
-          Seu acesso à internet foi liberado.
-        </p>
-        <p class="text-gray-600 text-base sm:text-lg mb-5 sm:mb-6">
-          Clique no botão abaixo para continuar sua navegação.
-        </p>
-        <!-- Botão "Acessar Internet" será adicionado dinamicamente pelo script.js -->
       </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Função principal que orquestra a verificação
+        async function checkPaymentAndInitialize() {
+          console.log("[HOME] Verificando pagamento...");
+          const params = new URLSearchParams(window.location.search);
+          const macAddress = params.get("mac");
+          const loginUrl = params.get("link-login-only");
+
+          if (!macAddress || !loginUrl) {
+            console.log(
+              "[HOME] MAC ou URL de Login não encontrados. Mostrando seleção."
+            );
+            showSelectionPage();
+            return;
+          }
+
+          // --- NOVA LÓGICA DE TIMEOUT ---
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => {
+            console.warn(
+              "[HOME] Timeout de 10s atingido. Cancelando verificação."
+            );
+            controller.abort();
+          }, 10000); // 10 segundos
+
+          try {
+            const response = await fetch(
+              `/api/check-payment-status?mac=${macAddress}&loginUrl=${encodeURIComponent(
+                loginUrl
+              )}`,
+              {
+                signal: controller.signal, // Associa o controlador à requisição
+              }
+            );
+
+            // Limpa o timeout se a resposta chegar a tempo
+            clearTimeout(timeoutId);
+
+            if (response.ok) {
+              const data = await response.json();
+              console.log(
+                "[HOME] Pagamento válido encontrado. Redirecionando..."
+              );
+              window.location.href = `/post-payment.html?loginUrl=${encodeURIComponent(
+                data.loginUrl
+              )}`;
+            } else {
+              console.log(
+                "[HOME] Nenhum pagamento válido (ou erro controlado). Mostrando seleção."
+              );
+              showSelectionPage();
+            }
+          } catch (error) {
+            // Limpa o timeout em caso de erro também
+            clearTimeout(timeoutId);
+
+            if (error.name === "AbortError") {
+              // Este erro acontece quando o timeout é atingido
+              console.error(
+                "[ERRO][HOME] A verificação de pagamento demorou demais (timeout)."
+              );
+            } else {
+              console.error(
+                "[ERRO][HOME] Falha na requisição de verificação de pagamento.",
+                error
+              );
+            }
+            showSelectionPage(); // Mostra a página de seleção em qualquer caso de erro
+          }
+        }
+
+        // Função para mostrar os botões de escolha (continua igual)
+        function showSelectionPage() {
+          const loadingDiv = document.getElementById("initial-loading");
+          const selectionDiv = document.getElementById("selection-page");
+          const currentUrlParams = window.location.search;
+
+          document.getElementById("voucher-link").href += currentUrlParams;
+          document.getElementById("plans-link").href += currentUrlParams;
+
+          loadingDiv.classList.add("d-none");
+          selectionDiv.classList.remove("d-none");
+          selectionDiv.classList.add("d-flex");
+        }
+
+        // Inicia o processo
+        checkPaymentAndInitialize();
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,25 @@
+/* Importa uma fonte moderna do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* --- Variáveis de Cor e Fontes --- */
+/* Definir variáveis torna fácil mudar a paleta de cores no futuro */
+:root {
+    --primary-color: #4a55a2;    /* Um azul/roxo moderno */
+    --primary-hover: #3a438a;   /* Cor mais escura para hover */
+    --background-color: #f0f2f5; /* Um cinza bem claro para o fundo */
+    --card-background: #ffffff;  /* Fundo dos cartões */
+    --text-color: #333333;       /* Cor principal do texto */
+    --text-light: #666666;       /* Cor de texto secundária */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Cor da sombra */
+    --main-font: 'Poppins', sans-serif;
+}
+
+/* --- Estilo Geral do Corpo --- */
+body {
+    font-family: var(--main-font);
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* --- Estilo do Contêiner Principal --- */
+/*

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conexão Pronta!</title>
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div
+        class="d-flex flex-column justify-content-center align-items-center vh-100"
+      >
+        <div class="col-lg-6 col-md-8 col-12 text-center">
+          <div class="main-panel">
+            <h1 class="card-title mb-3">✅ Pagamento Confirmado!</h1>
+            <p class="lead text-muted mt-3">
+              Seu acesso à internet está pronto para ser liberado.
+            </p>
+            <p>Clique no botão abaixo para se conectar e começar a navegar.</p>
+            <a id="connect-button" href="#" class="btn btn-primary btn-lg mt-4">
+              Conectar Agora
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const loginUrl = params.get("loginUrl");
+        const connectButton = document.getElementById("connect-button");
+        if (loginUrl) {
+          connectButton.href = loginUrl;
+        } else {
+          connectButton.textContent = "Erro de Conexão";
+          connectButton.classList.add("disabled");
+        }
+      });
+    </script>
+  </body>
+</html>

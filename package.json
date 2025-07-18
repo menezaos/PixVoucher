@@ -10,8 +10,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@mercadopago/sdk-js": "^0.0.3",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mercadopago": "^2.8.0",
     "mysql2": "^3.14.2",
     "node-routeros": "^1.6.8",
